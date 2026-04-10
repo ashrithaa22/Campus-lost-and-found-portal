@@ -1,0 +1,101 @@
+body {
+    margin: 0;
+    font-family: Arial;
+}
+
+/* CENTER HOME / PAGES */
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* GRADIENT BACKGROUND */
+.gradient {
+    background: linear-gradient(to right, #5f2c82, #ff758c);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* CARD (same as your original style) */
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 320px;
+    text-align: center;
+    margin: 20px;
+}
+
+/* INPUTS */
+input, textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+/* BUTTON */
+button {
+    width: 100%;
+    padding: 10px;
+    background: #ff4b7d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+}
+
+/* TOGGLE */
+.toggle {
+    display: flex;
+    justify-content: space-between;
+}
+
+.toggle button {
+    width: 48%;
+    background: #ddd;
+}
+
+.toggle .active {
+    background: #ff4b7d;
+    color: white;
+}
+
+/* IMAGE UPLOAD BOX */
+.upload-box {
+    border: 2px dashed #aaa;
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+/* IMAGE PREVIEW */
+#preview {
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+/* ✅ FIXED IMAGE SIZE (ONLY CHANGE YOU WANTED) */
+.item-img {
+    width: 100%;
+    max-height: 250px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+/* TITLE */
+h2 {
+    margin-top: 20px;
+    color: white;
+}
+
+/* SEARCH BAR */
+#search {
+    width: 80%;
+    padding: 10px;
+    margin: 20px auto;
+    border-radius: 10px;
+    border: none;
+}
