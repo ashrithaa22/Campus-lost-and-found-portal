@@ -1,0 +1,60 @@
+<h2>Admin Panel - Lost & Found Items</h2>
+
+<!-- 🔗 NAVIGATION -->
+<a href="/analytics">📊 View Analytics</a> |
+<a href="/logout">Logout</a>
+
+<hr>
+
+<!-- 🚨 REPORTS SECTION (NEW FEATURE) -->
+<h2 style="color:red;">Reported Items</h2>
+
+{% if reports %}
+    {% for r in reports %}
+        <div style="border:2px solid red; padding:10px; margin:10px">
+            <p><b>Item:</b> {{ r[1] }}</p>
+            <p><b>Reason:</b> {{ r[2] }}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No reports</p>
+{% endif %}
+
+<hr>
+
+<!-- 📦 ITEMS SECTION -->
+{% for item in items %}
+<div style="border:1px solid black; padding:10px; margin:10px">
+
+    <h3>{{ item[1] }} ({{ item[10] }})</h3>
+
+    <p><b>Description:</b> {{ item[2] }}</p>
+    <p><b>Color:</b> {{ item[3] }}</p>
+    <p><b>Location:</b> {{ item[4] }}</p>
+    <p><b>Date:</b> {{ item[5] }}</p>
+    <p><b>Contact:</b> {{ item[6] }}</p>
+    <p><b>Email:</b> {{ item[7] }}</p>
+    <p><b>Category:</b> {{ item[8] }}</p>
+    <p><b>Status:</b> {{ item[11] }}</p>
+
+    {% if item[9] %}
+        <img src="/uploads/{{ item[9] }}" width="150">
+    {% endif %}
+
+    <br><br>
+
+    <!-- ✅ APPROVE -->
+    <a href="/status/{{ item[0] }}/Approved">Approve</a> |
+
+    <!-- STATUS -->
+    <a href="/status/{{ item[0] }}/Found">Mark Found</a> |
+    <a href="/status/{{ item[0] }}/Pending">Pending</a> |
+
+    <!-- DELETE -->
+    <a href="/delete/{{ item[0] }}">Delete</a> |
+
+    <!-- CHAT -->
+    <a href="/chat/{{ item[0] }}/admin">Chat</a>
+
+</div>
+{% endfor %}

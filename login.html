@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body class="gradient">
+
+<div class="card">
+<h2>Campus Lost & Found</h2>
+
+<!-- TOGGLE -->
+<div class="toggle">
+<button type="button" id="studentBtn" class="active" onclick="setRole('student')">Student</button>
+<button type="button" id="adminBtn" onclick="setRole('admin')">Admin</button>
+</div>
+
+<form method="POST">
+
+<!-- hidden role field -->
+<input type="hidden" name="role" id="role" value="student">
+
+<input type="email" name="email" placeholder="Enter Email" required>
+<input type="password" name="password" placeholder="Enter Password" required>
+
+<button type="submit">Sign In</button>
+
+<!-- ✅ REGISTER LINK ADDED -->
+<p style="text-align:center; margin-top:10px;">
+    New user? <a href="/register">Register here</a>
+</p>
+
+</form>
+
+</div>
+
+<script>
+function setRole(value){
+    document.getElementById("role").value = value;
+
+    document.getElementById("studentBtn").classList.remove("active");
+    document.getElementById("adminBtn").classList.remove("active");
+
+    if(value === "student"){
+        document.getElementById("studentBtn").classList.add("active");
+    } else {
+        document.getElementById("adminBtn").classList.add("active");
+    }
+}
+</script>
+
+</body>
+</html>

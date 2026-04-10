@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body class="gradient">
+
+<h2>All Items</h2>
+
+<!-- 🔗 NAVIGATION -->
+<a href="/add">➕ Add Item</a> |
+<a href="/analytics">📊 Analytics</a> |
+<a href="/logout">Logout</a>
+
+<br><br>
+
+<!-- SEARCH BAR -->
+<input type="text" id="search" placeholder="Search items..." onkeyup="searchItems()">
+
+<!-- GRID CONTAINER -->
+<div class="container">
+
+{% for item in items %}
+<div class="card item">
+
+<h3>{{ item[1] }} ({{ item[10] }})</h3>
+
+<p><b>Description:</b> {{ item[2] }}</p>
+<p><b>Color:</b> {{ item[3] }}</p>
+<p><b>Location:</b> {{ item[4] }}</p>
+<p><b>Date:</b> {{ item[5] }}</p>
+<p><b>Contact:</b> {{ item[6] }}</p>
+<p><b>Email:</b> {{ item[7] }}</p>
+<p><b>Category:</b> {{ item[8] }}</p>
+
+<!-- ✅ STATUS -->
+<p><b>Status:</b> {{ item[11] }}</p>
+
+<!-- IMAGE -->
+{% if item[9] %}
+<img src="/uploads/{{ item[9] }}" class="item-img">
+{% else %}
+<p>No Image</p>
+{% endif %}
+
+<br><br>
+
+<!-- CONTACT -->
+<button onclick="alert('Contact: {{ item[6] }}')">Contact</button>
+
+<!-- 💬 CHAT -->
+<a href="/chat/{{ item[0] }}/student">
+<button>Chat</button>
+</a>
+
+<br><br>
+
+<!-- 🚩 REPORT -->
+<form action="/report/{{ item[0] }}" method="POST">
+<input type="text" name="reason" placeholder="Report reason" required>
+<button type="submit">Report</button>
+</form>
+
+</div>
+{% endfor %}
+
+</div>
+
+<!-- SEARCH SCRIPT -->
+<script>
+function searchItems(){
+    let input = document.getElementById("search").value.toLowerCase();
+    let items = document.getElementsByClassName("item");
+
+    for(let i=0; i<items.length; i++){
+        let text = items[i].innerText.toLowerCase();
+
+        if(text.includes(input)){
+            items[i].style.display = "block";
+        } else {
+            items[i].style.display = "none";
+        }
+    }
+}
+</script>
+
+</body>
+</html>

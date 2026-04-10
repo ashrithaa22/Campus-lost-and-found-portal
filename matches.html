@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body class="gradient">
+
+<h2 style="text-align:center;color:white;">Possible Matches</h2>
+
+{% if matches %}
+    {% for item in matches %}
+    <div class="card">
+
+        <h3>{{ item[1] }} ({{ item[10] }})</h3>
+
+        <p><b>Description:</b> {{ item[2] }}</p>
+        <p><b>Location:</b> {{ item[4] }}</p>
+        <p><b>Contact:</b> {{ item[6] }}</p>
+
+        <!-- ✅ FIXED IMAGE -->
+        {% if item[9] %}
+            <img src="/uploads/{{ item[9] }}" width="100%">
+        {% else %}
+            <p>No Image</p>
+        {% endif %}
+
+    </div>
+    {% endfor %}
+{% else %}
+    <p style="text-align:center;color:white;">No matches found</p>
+{% endif %}
+
+<br>
+
+<div style="text-align:center;">
+<a href="/dashboard"><button>Go to Dashboard</button></a>
+</div>
+
+</body>
+</html>

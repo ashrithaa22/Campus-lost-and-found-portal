@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: linear-gradient(to right, purple, pink);
+        }
+
+        h2 {
+            text-align: center;
+            color: white;
+            padding: 10px;
+        }
+
+        .top-bar {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .top-bar a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .chat-box {
+            width: 350px;
+            height: 500px;
+            background: #d6d0c8;
+            margin: auto;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+        }
+
+        .msg {
+            padding: 8px 12px;
+            margin: 5px;
+            border-radius: 10px;
+            max-width: 70%;
+        }
+
+        .me {
+            background: #b7e4a7;
+            margin-left: auto;
+        }
+
+        .other {
+            background: #eee;
+            margin-right: auto;
+        }
+
+        .time {
+            font-size: 10px;
+            color: gray;
+        }
+
+        .sender {
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .input-box {
+            display: flex;
+            padding: 10px;
+            background: white;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-left: 10px;
+            padding: 10px 15px;
+            border: none;
+            background: #ff4d6d;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Chat for Item ID: {{ item_id }}</h2>
+
+<div class="top-bar">
+    <a href="/admin">⬅ Back to Admin</a>
+</div>
+
+<div class="chat-box">
+
+    <div class="messages" id="chatArea">
+        {% for sender, message, time in chats %}
+            <div class="msg {% if sender == user %}me{% else %}other{% endif %}">
+                
+                <div class="sender">{{ sender }}</div>
+
+                {{ message }}
+                <div class="time">{{ time }}</div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <form method="POST" class="input-box">
+        <input type="text" name="msg" placeholder="Type message..." required>
+        <button type="submit">Send</button>
+    </form>
+
+</div>
+
+<script>
+    // ✅ Auto scroll to bottom
+    var chatArea = document.getElementById("chatArea");
+    chatArea.scrollTop = chatArea.scrollHeight;
+</script>
+
+</body>
+</html>
