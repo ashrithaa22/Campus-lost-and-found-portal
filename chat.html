@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/static/style.css">
+
+<style>
+.chat-box {
+    height: 420px;
+    overflow-y: auto;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.msg {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 12px;
+    max-width: 70%;
+}
+
+.me {
+    background: linear-gradient(45deg, #ff4b7d, #ff758c);
+    color: white;
+    margin-left: auto;
+}
+
+.other {
+    background: white;
+}
+</style>
+
+</head>
+
+<body class="gradient">
+
+<div class="card">
+
+<h2>💬 Chat</h2>
+
+<!-- CHAT DISPLAY -->
+<div class="chat-box" id="chatBox">
+{% for c in chats %}
+<div class="msg {% if c[0] == user %}me{% else %}other{% endif %}">
+<b>{{ c[0] }}</b><br>
+{{ c[1] }}<br>
+<small>{{ c[2] }}</small>
+</div>
+{% endfor %}
+</div>
+
+<!-- ✅ FORM FIX -->
+<form method="POST" action="">
+<input type="text" name="msg" placeholder="Type message..." required>
+<button type="submit">Send</button>
+</form>
+
+</div>
+
+<script>
+// auto scroll
+let box = document.getElementById("chatBox");
+box.scrollTop = box.scrollHeight;
+
+// ✅ IMPORTANT: DO NOT refresh while typing
+setInterval(() => {
+    if(document.activeElement.tagName !== "INPUT"){
+        location.reload();
+    }
+}, 3000);
+</script>
+
+</body>
+</html>

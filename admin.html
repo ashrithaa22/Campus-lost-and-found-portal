@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/static/style.css">
+<title>Admin Panel</title>
+
+<style>
+
+/* HEADER */
+.header {
+    text-align: center;
+    color: white;
+    margin-top: 20px;
+}
+
+/* GRID */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* CARD HOVER */
+.card {
+    width: 300px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* STATUS COLORS */
+.approved { color: lightgreen; }
+.pending { color: orange; }
+.found { color: cyan; }
+
+</style>
+
+</head>
+
+<body class="gradient">
+
+<!-- 🔥 HEADER -->
+<div class="header">
+<h2>🛠 Admin Panel</h2>
+<p>Manage all lost & found activities</p>
+</div>
+
+<!-- 🔗 NAV -->
+<div style="text-align:center; margin:20px;">
+<a href="/analytics"><button>📊 Analytics</button></a>
+<a href="/logout"><button>Logout</button></a>
+</div>
+
+<hr style="width:80%;">
+
+<!-- 🚨 REPORTS -->
+<h2 style="color:red; text-align:center;">🚨 Reported Items</h2>
+
+<div class="container">
+
+{% if reports %}
+    {% for r in reports %}
+    <div class="card" style="border:2px solid red;">
+        <p><b>Item:</b> {{ r[1] }}</p>
+        <p><b>Reason:</b> {{ r[2] }}</p>
+    </div>
+    {% endfor %}
+{% else %}
+    <p style="color:white;">No reports</p>
+{% endif %}
+
+</div>
+
+<hr style="width:80%;">
+
+<!-- 📦 ITEMS -->
+<h2 style="text-align:center;">📦 All Items</h2>
+
+<div class="container">
+
+{% for item in items %}
+<div class="card">
+
+<h3>{{ item[1] }} ({{ item[10] }})</h3>
+
+<p>{{ item[2] }}</p>
+<p><b>📍</b> {{ item[4] }}</p>
+<p><b>📅</b> {{ item[5] }}</p>
+<p><b>📧</b> {{ item[7] }}</p>
+
+<!-- STATUS -->
+<p><b>Status:</b> 
+<span class="
+{% if item[11] == 'Approved' %}approved
+{% elif item[11] == 'Pending' %}pending
+{% elif item[11] == 'Found' %}found
+{% endif %}
+">
+{{ item[11] }}
+</span>
+</p>
+
+<!-- IMAGE -->
+{% if item[9] %}
+<img src="/uploads/{{ item[9] }}" class="item-img">
+{% else %}
+<p>No Image</p>
+{% endif %}
+
+<br>
+
+<!-- 🔥 ACTION BUTTONS -->
+<div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:5px;">
+
+<a href="/status/{{ item[0] }}/Approved">
+<button>Approve</button>
+</a>
+
+<a href="/status/{{ item[0] }}/Found">
+<button>Found</button>
+</a>
+
+<a href="/status/{{ item[0] }}/Pending">
+<button>Pending</button>
+</a>
+
+<a href="/delete/{{ item[0] }}">
+<button>Delete</button>
+</a>
+
+<!-- ✅ FIXED CHAT -->
+<a href="/chat/{{ item[0] }}">
+<button>Chat</button>
+</a>
+
+</div>
+
+</div>
+{% endfor %}
+
+</div>
+
+</body>
+</html>

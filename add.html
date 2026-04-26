@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body class="gradient">
+
+<div class="card">
+
+<h2>Campus Lost & Found</h2>
+
+<!-- TOGGLE -->
+<div class="toggle">
+    <button type="button" id="lostBtn" class="active" onclick="setType('lost')">Lost Item</button>
+    <button type="button" id="foundBtn" onclick="setType('found')">Found Item</button>
+</div>
+
+<form method="POST" enctype="multipart/form-data">
+
+<!-- hidden type field (VERY IMPORTANT) -->
+<input type="hidden" name="type" id="type" value="lost">
+
+<input name="title" placeholder="Item Title" required>
+<textarea name="description" placeholder="Description"></textarea>
+<input name="color" placeholder="Item Colour">
+<input name="location" placeholder="Lost Location">
+<input type="date" name="date">
+<input name="contact" placeholder="Contact Number">
+
+<select name="category">
+<option>Select Category</option>
+<option>Electronics</option>
+<option>Documents</option>
+<option>Clothing</option>
+</select>
+
+<!-- CUSTOM IMAGE UPLOAD -->
+<input type="file" name="image" id="file" hidden>
+<input name="email" placeholder="Your Email">
+
+<div class="upload-box" onclick="uploadImage()">
+    Click to Upload Image
+</div>
+
+<img id="preview" style="width:100%; display:none; margin-top:10px; border-radius:10px;">
+
+<button type="submit">Submit</button>
+
+
+</form>
+
+</div>
+
+<!-- SCRIPT -->
+<script>
+function setType(value){
+    document.getElementById("type").value = value;
+
+    document.getElementById("lostBtn").classList.remove("active");
+    document.getElementById("foundBtn").classList.remove("active");
+
+    if(value === "lost"){
+        document.getElementById("lostBtn").classList.add("active");
+    } else {
+        document.getElementById("foundBtn").classList.add("active");
+    }
+}
+
+function uploadImage(){
+    document.getElementById('file').click();
+}
+
+document.getElementById('file').onchange = function(e){
+    const reader = new FileReader();
+    reader.onload = function(){
+        let img = document.getElementById('preview');
+        img.src = reader.result;
+        img.style.display = "block";
+    }
+    reader.readAsDataURL(e.target.files[0]);
+}
+</script>
+
+</body>
+</html>
